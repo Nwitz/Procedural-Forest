@@ -10,3 +10,11 @@ Xcode/COMP371_Labs.xcodeproj/project.xcworkspace/
 Xcode/COMP371_Labs.xcodeproj/
 
 VS2017/.vs/Labs/v16/
+
+*.vcxproj
+
+VS2017/Labs.vcxproj.filters
+
+VS2017/Labs.vcxproj.user
+
+*.log
