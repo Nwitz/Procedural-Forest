@@ -88,10 +88,10 @@ int main(void)
 
         glm::mat4 mvp = proj * view * model;
 
-        Shader shader("../res/Shaders/Basic.shader");
+        Shader shader("res/shaders/Basic.shader");
         shader.Bind();
 
-        Texture texture("../res/textures/autumn_leaves.png");
+        Texture texture("res/textures/autumn_leaves.png");
         texture.Bind();
         shader.SetUniform1i("u_Texture", 0);
         shader.SetUniformMat4f("u_MVP", mvp);
@@ -145,7 +145,7 @@ int main(void)
 
             /* Poll for and process events */
             glfwPollEvents();
-        }
+		}
     }
     glfwTerminate();
     return 0;
