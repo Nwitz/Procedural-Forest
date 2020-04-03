@@ -18,3 +18,5 @@ VS2017/Labs.vcxproj.filters
 VS2017/Labs.vcxproj.user
 
 *.log
+
+VS2017/imgui.ini
