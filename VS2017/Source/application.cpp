@@ -21,6 +21,8 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "vendor/imgui/imgui.h"
+#include "vendor/imgui/imgui_impl_glfw_gl3.h"
 
 using namespace std;
 
@@ -55,10 +57,10 @@ int main(void)
     
     { // used to prevent out of context error at Buffer distruction.
         float positions[] = {
-            100.0f, 100.0f, 0.0f, 0.0f, // index 0
-            200.0f, 100.0f, 1.0f, 0.0f, // index 1
-            200.0f, 200.0f, 1.0f, 1.0f, // index 2
-            100.0f, 200.0f, 0.0f, 1.0f  // index 3
+            -50.0f, -50.0f, 0.0f, 0.0f, // index 0
+             50.0f, -50.0f, 1.0f, 0.0f, // index 1
+             50.0f,  50.0f, 1.0f, 1.0f, // index 2
+            -50.0f,  50.0f, 0.0f, 1.0f  // index 3
         };
     
         // Index buffer
@@ -83,10 +85,7 @@ int main(void)
 
         IndexBuffer ib = IndexBuffer(indices, 6);
         glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 0.0f, 0.0f));
-        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200.0f, 200.0f, 0));
-
-        glm::mat4 mvp = proj * view * model;
+        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
         Shader shader("res/shaders/Basic.shader");
         shader.Bind();
@@ -94,7 +93,6 @@ int main(void)
         Texture texture("res/textures/autumn_leaves.png");
         texture.Bind();
         shader.SetUniform1i("u_Texture", 0);
-        shader.SetUniformMat4f("u_MVP", mvp);
 
         va.Unbind();
         vb.UnBind();
@@ -103,42 +101,50 @@ int main(void)
 
         Renderer renderer;
 
-        float r = 0.0f;
-        float g = 0.0f;
-        float b = 0.0f;
+        ImGui::CreateContext();
+        ImGui_ImplGlfwGL3_Init(window, true);
+        ImGui::StyleColorsDark();
 
-        float rIncrement = 0.05f;
-        float gIncrement = 0.03f;
-        float bIncrement = 0.01f;
+        glm::vec3 translationA = glm::vec3(200.0f, 200.0f, 0);
+        glm::vec3 translationB = glm::vec3(400.0f, 200.0f, 0);
+
+        bool show_demo_window = true;
+        bool show_another_window = false;
+        ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             renderer.Clear();
 
+            ImGui_ImplGlfwGL3_NewFrame();
+
             shader.Bind();
-            shader.SetUniform4f("u_Color", r, g, b, 1.0f);
+            {
+                glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
+                glm::mat4 mvp = proj * view * model;
+                shader.SetUniformMat4f("u_MVP", mvp);
 
-            renderer.Draw(va, ib, shader);
+                renderer.Draw(va, ib, shader);
+            }
 
-            if (r > 1.0f)
-                rIncrement = -0.05f;
-            else if (r < 0.0f)
-                rIncrement = 0.05f;
+            {
+                glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
+                glm::mat4 mvp = proj * view * model;
+                shader.SetUniformMat4f("u_MVP", mvp);
 
-            if (g > 1.0f)
-                gIncrement = -0.03f;
-            else if (g < 0.0f)
-                gIncrement = 0.03f;
+                renderer.Draw(va, ib, shader);
+            }
 
-            if (b > 1.0f)
-                bIncrement = -0.01f;
-            else if (b < 0.0f)
-                bIncrement = 0.01f;
 
-            r += rIncrement;
-            g += gIncrement;
-            b += bIncrement;
+            {
+                ImGui::SliderFloat3("TranslationA", &translationA.x, 0.0f, 960.0f);
+                ImGui::SliderFloat3("TranslationB", &translationB.x, 0.0f, 960.0f);
+                ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            }
+
+            ImGui::Render();
+            ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
@@ -147,6 +153,8 @@ int main(void)
             glfwPollEvents();
 		}
     }
+    ImGui_ImplGlfwGL3_Shutdown();
+    ImGui::DestroyContext();
     glfwTerminate();
     return 0;
 }
