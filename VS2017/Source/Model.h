@@ -1,28 +1,17 @@
 #pragma once
 
-#include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "VertexBufferLayout.h"
-#include "Shader.h"
-#include "glm/gtc/matrix_transform.hpp"
-
-
-#include <memory>
+#include "Object.h"
 
 class Model {
-public:
-	Model(std::string path);
+
+public: 
+	Model(const Object &model);
 	~Model();
-	VertexArray &getVAO() const;
-	IndexBuffer &getIndexBuffer() const;
+	virtual void draw(const Shader &shader);
 
 private:
-	std::unique_ptr<VertexArray> m_VAO;
-	std::unique_ptr<VertexBuffer> m_PositionVBO;
-	std::unique_ptr<VertexBuffer> m_NormalVBO;
-	std::unique_ptr<VertexBuffer> m_TexturePosVBO;
-	std::unique_ptr<IndexBuffer> m_IndexBuffer;
-	std::unique_ptr<Shader> m_Shader;
+	VertexArray *m_VAO;
+	IndexBuffer *m_IndexBuffer;
 
+	//TODO: create translation, rotation and scale variables to be used with shader that has a model uniform.
 };

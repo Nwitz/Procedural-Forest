@@ -7,8 +7,8 @@
 namespace test {
 	
 	TestModel::TestModel()
-		: m_CubeModel("res/models/cube.obj"), m_shader("res/shaders/Basic.shader"),
-		m_Translation(0.0f, 0.0f, 0.0f), m_Cube(m_CubeModel)
+		: m_CubeObject("res/models/cube.obj"), m_shader("res/shaders/Basic.shader"),
+		m_Translation(0.0f, 0.0f, 0.0f), m_Cube(m_CubeObject)
 	{	
 
 		// Camera parameters for view transform
@@ -51,7 +51,7 @@ namespace test {
 		m_shader.SetUniform4f("u_Color", 1.0f, 1.0f, 1.0f, 1.0f);
 		
 		m_Cube.draw(m_shader);
-		renderer.Draw(m_CubeModel.getVAO(), m_CubeModel.getIndexBuffer(), m_shader);
+		renderer.Draw(m_CubeObject.getVAO(), m_CubeObject.getIndexBuffer(), m_shader);
 	}
 	
 	void TestModel::OnImGuiRender()

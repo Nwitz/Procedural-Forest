@@ -5,8 +5,8 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <memory>
+#include "Object.h"
 #include "Model.h"
-#include "ModelInstance.h"
 
 namespace test {
 	
@@ -21,10 +21,10 @@ namespace test {
 		void OnImGuiRender() override;
 
 	private: 
-		Model m_CubeModel;
+		Object m_CubeObject;
 		glm::mat4 m_Proj, m_View;
 		glm::vec3 m_Translation;
-		ModelInstance m_Cube;
+		Model m_Cube;
 		Shader m_shader;
 	};
 }
