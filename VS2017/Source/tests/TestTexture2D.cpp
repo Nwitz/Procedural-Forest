@@ -1,17 +1,35 @@
 #pragma once
 
 #include "TestTexture2D.h"
+#include <vector>
+#include <iostream>
 
 namespace test {
 	
 	TestTexture2D::TestTexture2D()
 		: m_TranslationA(200.0f, 200.0f, 0.0f), m_TranslationB(400.0f, 200.0f, 0.0f)
 	{
+
+		std::vector<glm::vec2> pos = {
+			glm::vec2(-50.0f, -50.0f),
+			glm::vec2( 50.0f, -50.0f),
+			glm::vec2( 50.0f,  50.0f),
+			glm::vec2(-50.0f,  50.0f)
+		};
+
+
 		float positions[] = {
-			-50.0f, -50.0f, 0.0f, 0.0f,
-			 50.0f, -50.0f, 1.0f, 0.0f,
-			 50.0f,  50.0f, 1.0f, 1.0f,
-			- 50.0f,  50.0f, 0.0f, 1.0f
+			-50.0f, -50.0f, 
+			 50.0f, -50.0f, 
+			 50.0f,  50.0f, 
+			-50.0f,  50.0f,
+		};
+
+		float uv[] = {
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f
 		};
 
 		unsigned int indices[] = {
@@ -20,17 +38,23 @@ namespace test {
 		};
 		
 
-
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 		m_VAO = std::make_unique<VertexArray>();
-		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 4 * 4 * sizeof(float));
 
+		std::cout << sizeof(pos[0][0]) << std::endl;
+		std::cout << sizeof(positions) << " " << pos.size() * sizeof(glm::vec2) << std::endl;
+		m_VertexBuffer = std::make_unique<VertexBuffer>(&pos[0], pos.size() * sizeof(glm::vec2));
 		VertexBufferLayout layout;
 		layout.Push<float>(2);  // position
-		layout.Push<float>(2);  // texture uv
 		m_VAO->AddBuffer(*m_VertexBuffer, layout);
+
+		m_VertexBuffer2 = std::make_unique<VertexBuffer>(uv, 4 * 2 * sizeof(float));
+		VertexBufferLayout layout2;
+		layout2.Push<float>(2);
+		m_VAO->AddBuffer(*m_VertexBuffer2, layout2);
+
 		m_IndexBuffer = std::make_unique<IndexBuffer>(indices, sizeof(indices)/sizeof(unsigned int));
 
 		m_Proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
@@ -38,6 +62,7 @@ namespace test {
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
+		m_Shader->SetUniform1i("u_UseTexture", true);
 		m_Shader->SetUniform4f("u_color", 0.8f, 0.3f, 0.8f, 1.0f);
 		m_Texture = std::make_unique<Texture>("res/textures/autumn_leaves.png");
 		m_Shader->SetUniform1i("u_Texture", 0);
