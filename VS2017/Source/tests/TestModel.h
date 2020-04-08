@@ -6,6 +6,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <memory>
 #include "Model.h"
+#include "ModelInstance.h"
 
 namespace test {
 	
@@ -23,9 +24,7 @@ namespace test {
 		Model m_CubeModel;
 		glm::mat4 m_Proj, m_View;
 		glm::vec3 m_Translation;
-
-		std::unique_ptr<VertexArray> m_VAO;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		ModelInstance m_Cube;
 		Shader m_shader;
 	};
 }

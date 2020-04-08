@@ -7,8 +7,8 @@
 namespace test {
 	
 	TestModel::TestModel()
-		: m_CubeModel("res/models/heracles.obj"), m_shader("res/shaders/Basic.shader"),
-		m_Translation(0.0f, 0.0f, 0.0f)
+		: m_CubeModel("res/models/cube.obj"), m_shader("res/shaders/Basic.shader"),
+		m_Translation(0.0f, 0.0f, 0.0f), m_Cube(m_CubeModel)
 	{	
 
 		// Camera parameters for view transform
@@ -25,6 +25,7 @@ namespace test {
 		m_View = lookAt(cameraPosition,  // eye
 			cameraPosition + cameraLookAt,  // center
 			cameraUp); // up
+
 	}
 	
 	TestModel::~TestModel()
@@ -49,6 +50,7 @@ namespace test {
 		m_shader.SetUniformMat4f("u_MVP", mvp);
 		m_shader.SetUniform4f("u_Color", 1.0f, 1.0f, 1.0f, 1.0f);
 		
+		m_Cube.draw(m_shader);
 		renderer.Draw(m_CubeModel.getVAO(), m_CubeModel.getIndexBuffer(), m_shader);
 	}
 	
