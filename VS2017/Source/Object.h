@@ -12,6 +12,7 @@
 
 class Object {
 public:
+	Object();
 	Object(std::string path);
 	~Object();
 	VertexArray &getVAO() const;
@@ -24,5 +25,4 @@ private:
 	std::unique_ptr<VertexBuffer> m_TexturePosVBO;
 	std::unique_ptr<IndexBuffer> m_IndexBuffer;
 	std::unique_ptr<Shader> m_Shader;
-
 };

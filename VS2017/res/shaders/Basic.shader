@@ -24,6 +24,9 @@ in vec2 v_TexCoord;
 uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 uniform bool u_UseTexture;
+uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
+uniform float ambientStrength = 0.3;
+uniform float specularStrength = 0.5;
 
 void main()
 {

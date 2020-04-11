@@ -28,6 +28,7 @@
 #include "tests/TestClearColor.h"
 #include "tests/TestTexture2D.h"
 #include "tests/TestModel.h"
+#include "tests/TestLight.h"
 
 int main(void)
 {
@@ -40,7 +41,7 @@ int main(void)
     
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1500, 1500, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -82,6 +83,7 @@ int main(void)
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
         testMenu->RegisterTest<test::TestModel>("Model");
+        testMenu->RegisterTest<test::TestLight>("Light");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))

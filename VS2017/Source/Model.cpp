@@ -18,3 +18,4 @@ void Model::draw(const Shader &shader)
 	Renderer renderer;
 	renderer.Draw(*m_VAO, *m_IndexBuffer, shader);
 }
+
