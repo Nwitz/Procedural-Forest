@@ -55,12 +55,9 @@ void ComplexModel::draw()
 }
 
 void ComplexModel::draw(Shader &shader) {
-    glm::mat4 modelMatrix; 
     shader.Bind();
     for (auto model : m_Models) {
-        modelMatrix = m_ModelMatrix * model->getModelMatrix();
-        shader.SetUniformMat4f("u_Model", modelMatrix);
-        model->draw(shader);
+        model->draw(shader, m_ModelMatrix);
     }
 }
 
