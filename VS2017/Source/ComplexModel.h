@@ -15,8 +15,8 @@ public:
 	void setScale(glm::vec3 scale);
 	void setTransforms(glm::vec3 Translation, float angle, glm::vec3 rotation, glm::vec3 scale);
 	void computeModelMatrix();
-	void draw();
-	void draw(Shader &shader);
+	virtual void draw();
+	virtual void draw(Shader &shader);
 	void addModel(Model *model);
 private:
 	std::vector<Model *> m_Models;

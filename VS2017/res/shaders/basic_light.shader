@@ -65,6 +65,6 @@ void main()
     else {
         vec3 result = (ambient + specular + diffuse);
         vec3 col = (norm + vec3(1.0, 1.0, 1.0))/2;
-        color = vec4(result, 1.0);
+        color = vec4(result, 1.0) * u_Color;
     }
 };

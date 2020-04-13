@@ -23,7 +23,7 @@ namespace test {
 
 	private: 
 		Object m_CubeObject;
-		ComplexModel *m_complexModel;
+		ComplexModel *m_complexModel, *m_BasicModelExtension;
 		glm::mat4 m_Proj, m_View;
 		float m_BaseAngle;
 		glm::vec3 m_BaseTranslation, m_BaseRotation, m_BaseScale, m_LightPosition, m_CameraPosition;

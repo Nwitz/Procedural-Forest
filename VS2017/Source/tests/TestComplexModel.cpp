@@ -3,6 +3,7 @@
 #include "TestComplexModel.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
+#include "BasicModelExtension.h"
 
 namespace test {
 	
@@ -12,7 +13,7 @@ namespace test {
 		m_BaseRotation(1.0f, 1.0f, 1.0f),
 		m_BaseScale(0.5f, 0.5f, 0.5f),
 		m_LightPosition(0.0f, 10.0f, 40.0f), m_CameraPosition(0.0f, 10.0f, 40.0f),
-		m_Cube(m_CubeObject)
+		m_Cube(m_CubeObject), m_BaseAngle(1.0f)
 	{	
 
 		// Camera parameters for view transform
@@ -33,6 +34,7 @@ namespace test {
 		glEnable(GL_DEPTH_TEST);
 
 		m_Shader.Bind();
+
 		m_complexModel = new ComplexModel(m_Shader);
 		m_complexModel->setRotation(45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		m_complexModel->setScale(glm::vec3(0.5f, 0.5f, 0.5f));
@@ -47,6 +49,9 @@ namespace test {
 		
 		m_complexModel->addModel(bottomCube);
 		m_complexModel->addModel(topTranslatedCube);
+
+
+		m_BasicModelExtension = new BasicModelExtension(m_Shader, m_CubeObject);
 	}
 	
 	TestComplexModel::~TestComplexModel()
@@ -81,6 +86,8 @@ namespace test {
 		m_complexModel->setTransforms(m_BaseTranslation, m_BaseAngle, m_BaseRotation, m_BaseScale);
 
 		m_complexModel->draw();
+
+		m_BasicModelExtension->draw();
 	}
 	
 	void TestComplexModel::OnImGuiRender()
