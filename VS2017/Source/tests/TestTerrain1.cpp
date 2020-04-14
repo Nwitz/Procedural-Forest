@@ -2,11 +2,11 @@
 
 #include "IndexBuffer.h"
 #include "VertexArray.h"
-#include "TestTree1.h"
+#include "TestTerrain1.h"
 
 namespace test {
 
-	TestTree1::TestTree1()
+	TestTerrain1::TestTerrain1()
 		: m_CubeObject("res/models/cube.obj"), m_Shader("res/shaders/basic_light.shader"),
 		m_BaseTranslation(-10.0f, 0.0f, 0.0f),
 		m_BaseRotation(1.0f, 1.0f, 1.0f),
@@ -50,18 +50,18 @@ namespace test {
 		m_complexModel->addModel(topTranslatedCube);
 
 		*/
-		m_Tree1 = new Tree1(m_Shader, m_CubeObject);
+		m_Terrain1 = new Terrain1(m_Shader, m_CubeObject);
 	}
 
-	TestTree1::~TestTree1()
+	TestTerrain1::~TestTerrain1()
 	{
 	}
 
-	void TestTree1::OnUpdate(float deltaTime)
+	void TestTerrain1::OnUpdate(float deltaTime)
 	{
 	}
 
-	void TestTree1::OnRender()
+	void TestTerrain1::OnRender()
 	{
 		GLCall(glClearColor(0.8f, 0.3f, 0.8f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -86,10 +86,10 @@ namespace test {
 
 		// m_complexModel->draw();
 
-		m_Tree1->draw();
+		m_Terrain1->draw();
 	}
 
-	void TestTree1::OnImGuiRender()
+	void TestTerrain1::OnImGuiRender()
 	{
 		ImGui::SliderFloat3("Base Translation", &m_BaseTranslation.x, -50.0f, 50.0f);
 		ImGui::SliderFloat("Base Angle", &m_BaseAngle, 0.0f, 360.0f);

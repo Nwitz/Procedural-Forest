@@ -32,6 +32,7 @@
 #include "tests/TestComplexModel.h"
 
 #include "tests/TestTree1.h"
+#include "tests/TestTerrain1.h"
 
 int main(void)
 {
@@ -89,7 +90,8 @@ int main(void)
         testMenu->RegisterTest<test::TestLight>("Light");
         testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
         testMenu->RegisterTest<test::TestTree1>("TestTree1");
-
+        testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
+        
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
