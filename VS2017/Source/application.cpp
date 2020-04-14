@@ -31,6 +31,8 @@
 #include "tests/TestLight.h"
 #include "tests/TestComplexModel.h"
 
+#include "tests/TestTree1.h"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -86,6 +88,7 @@ int main(void)
         testMenu->RegisterTest<test::TestModel>("Model");
         testMenu->RegisterTest<test::TestLight>("Light");
         testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
+        testMenu->RegisterTest<test::TestTree1>("TestTree1");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
