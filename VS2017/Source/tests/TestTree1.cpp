@@ -38,18 +38,7 @@ namespace test {
 		m_complexModel->setRotation(45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		m_complexModel->setScale(glm::vec3(0.5f, 0.5f, 0.5f));
 		m_complexModel->computeModelMatrix();
-		/*
-		Model* bottomCube = new Model(m_CubeObject);
-		Model* topTranslatedCube = new Model(m_CubeObject);
-		topTranslatedCube->setTranslation(glm::vec3(10.0f, 10.0f, 1.0f));
-		topTranslatedCube->setRotation(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-		topTranslatedCube->setScale(glm::vec3(1.25f, 1.25f, 1.25f));
-		topTranslatedCube->computeModelMatrix();
-
-		m_complexModel->addModel(bottomCube);
-		m_complexModel->addModel(topTranslatedCube);
-
-		*/
+		
 		m_Tree1 = new Tree1(m_Shader, m_CubeObject);
 	}
 
