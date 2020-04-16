@@ -33,6 +33,8 @@
 
 #include "tests/TestTree1.h"
 #include "tests/TestTerrain1.h"
+#include "tests/TestGrass.h"
+#include "tests/TestRocks.h"
 
 int main(void)
 {
@@ -91,6 +93,8 @@ int main(void)
         testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
         testMenu->RegisterTest<test::TestTree1>("TestTree1");
         testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
+        testMenu->RegisterTest<test::TestGrass>("TestGrass");
+        testMenu->RegisterTest<test::TestRocks>("TestRocks");
         
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
