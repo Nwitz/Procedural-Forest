@@ -19,12 +19,14 @@ HeightMapGenerator::~HeightMapGenerator()
 void HeightMapGenerator::generateHeightMap(unsigned int seed) {
 	srand(seed);
 
-	if (m_DeltaHeight == 0)
+	if (m_DeltaHeight == 0) {
 		generateFlat();
+		return;
+	}
 	
-	unsigned int goUpChance = 15;
-	unsigned int goDownChance = 30;
-	unsigned int stayAtLowerChance = 65;
+	unsigned int goUpChance = 10;
+	unsigned int goDownChance = 20;
+	unsigned int stayAtLowerChance = 60;
 	unsigned int stayAtUpper = 100;
 
 	int lowBound = -m_HeightOffset;
@@ -119,6 +121,11 @@ void HeightMapGenerator::setLeftColumn(int goUpChance, int goDownChance, int low
 
 void HeightMapGenerator::generateFlat()
 {
+	for (int i = 0; i < m_Rows; i++) {
+		for (int j = 0; j < m_Columns; j++) {
+			m_HeightMap[i][j] = 0;
+		}
+	}
 }
 
 int** HeightMapGenerator::getHeightMap()

@@ -35,7 +35,7 @@ namespace test {
 
 		m_Shader.Bind();
 
-		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 2);
+		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 10);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
 
@@ -45,12 +45,13 @@ namespace test {
 		glm::vec3 scale;
 
 		float cubeSize = 0.1f;
+		float cubeHeight = 0.4;
 		float spacing = 1.0f;
 		for (int i = 0; i < m_HeightMapGenerator->getRows(); i++) {
 			for (int j = 0; j < m_HeightMapGenerator->getColumns(); j++) {
 				terrain = new Terrain1(m_Shader, m_CubeObject);
 				translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2, j * spacing);
-				scale = glm::vec3(cubeSize, cubeSize, cubeSize);
+				scale = glm::vec3(cubeSize, cubeHeight, cubeSize);
 				terrain->setTranslation(translation);
 				terrain->setScale(scale);
 				terrain->computeModelMatrix();
@@ -73,7 +74,7 @@ namespace test {
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 		Renderer renderer;
 
-		glm::vec3 cameraLookAt(0.0f, -0.1f, -1.0f);
+		glm::vec3 cameraLookAt(0.0f, -1.0f, -1.0f);
 		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
 		// Set initial view matrix
 		m_View = lookAt(m_CameraPosition,  // eye
