@@ -3,6 +3,7 @@
 #include "TestLight.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
+#include <iostream>
 
 namespace test {
 	
@@ -29,6 +30,9 @@ namespace test {
 
 		GLCall(glEnable(GL_CULL_FACE));
 		glEnable(GL_DEPTH_TEST);
+
+		unsigned int uint = 5;
+		std::cout << uint / 2 << std::endl;
 	}
 	
 	TestLight::~TestLight()
