@@ -2,11 +2,11 @@
 
 #include "IndexBuffer.h"
 #include "VertexArray.h"
-#include "TestBush2.h"
+#include "TestBush3.h"
 
 namespace test {
 
-	TestBush2::TestBush2()
+	TestBush3::TestBush3()
 		: m_CubeObject("res/models/cube.obj"), m_Shader("res/shaders/basic_light.shader"),
 		m_BaseTranslation(-10.0f, 0.0f, 0.0f),
 		m_BaseRotation(1.0f, 1.0f, 1.0f),
@@ -39,18 +39,18 @@ namespace test {
 		m_complexModel->setScale(glm::vec3(0.5f, 0.5f, 0.5f));
 		m_complexModel->computeModelMatrix();
 
-		m_Bush2 = new Bush2(m_Shader, m_CubeObject);
+		m_Bush3 = new Bush3(m_Shader, m_CubeObject);
 	}
 
-	TestBush2::~TestBush2()
+	TestBush3::~TestBush3()
 	{
 	}
 
-	void TestBush2::OnUpdate(float deltaTime)
+	void TestBush3::OnUpdate(float deltaTime)
 	{
 	}
 
-	void TestBush2::OnRender()
+	void TestBush3::OnRender()
 	{
 		GLCall(glClearColor(0.8f, 0.3f, 0.8f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -71,10 +71,10 @@ namespace test {
 		m_Shader.SetUniform3fv("u_LightPos", m_LightPosition);
 		m_Shader.SetUniform3fv("u_ViewPos", m_CameraPosition);
 
-		m_Bush2->draw();
+		m_Bush3->draw();
 	}
 
-	void TestBush2::OnImGuiRender()
+	void TestBush3::OnImGuiRender()
 	{
 		ImGui::SliderFloat3("Base Translation", &m_BaseTranslation.x, -50.0f, 50.0f);
 		ImGui::SliderFloat("Base Angle", &m_BaseAngle, 0.0f, 360.0f);

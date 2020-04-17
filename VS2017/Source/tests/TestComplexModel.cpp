@@ -83,10 +83,6 @@ namespace test {
 		m_Shader.SetUniform3fv("u_LightPos", m_LightPosition);
 		m_Shader.SetUniform3fv("u_ViewPos", m_CameraPosition);
 
-		m_complexModel->setTransforms(m_BaseTranslation, m_BaseAngle, m_BaseRotation, m_BaseScale);
-
-		m_complexModel->draw();
-
 		m_BasicModelExtension->draw();
 	}
 	
