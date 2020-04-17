@@ -1,20 +1,19 @@
 #pragma once
 
-#include "TestComplexModel.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
-#include "BasicModelExtension.h"
+#include "TestBush1.h"
 
 namespace test {
-	
-	TestComplexModel::TestComplexModel()
+
+	TestBush1::TestBush1()
 		: m_CubeObject("res/models/cube.obj"), m_Shader("res/shaders/basic_light.shader"),
-		m_BaseTranslation(-10.0f, 0.0f, 0.0f), 
+		m_BaseTranslation(-10.0f, 0.0f, 0.0f),
 		m_BaseRotation(1.0f, 1.0f, 1.0f),
 		m_BaseScale(0.5f, 0.5f, 0.5f),
-		m_LightPosition(0.0f, 10.0f, 40.0f), m_CameraPosition(0.0f, 10.0f, 40.0f),
+		m_LightPosition(0.0f, 10.0f, 40.0f), m_CameraPosition(0.0f, 10.0f, 60.0f),
 		m_Cube(m_CubeObject), m_BaseAngle(1.0f)
-	{	
+	{
 
 		// Camera parameters for view transform
 		glm::vec3 cameraLookAt(0.0f, -0.1f, -1.0f);
@@ -39,30 +38,19 @@ namespace test {
 		m_complexModel->setRotation(45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		m_complexModel->setScale(glm::vec3(0.5f, 0.5f, 0.5f));
 		m_complexModel->computeModelMatrix();
-
-		Model *bottomCube = new Model(m_CubeObject);
-		Model *topTranslatedCube = new Model(m_CubeObject);
-		topTranslatedCube->setTranslation(glm::vec3(10.0f, 10.0f, 1.0f));
-		topTranslatedCube->setRotation(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-		topTranslatedCube->setScale(glm::vec3(1.25f, 1.25f, 1.25f));
-		topTranslatedCube->computeModelMatrix();
 		
-		m_complexModel->addModel(bottomCube);
-		m_complexModel->addModel(topTranslatedCube);
-
-
-		m_BasicModelExtension = new BasicModelExtension(m_Shader, m_CubeObject);
+		m_Bush1 = new Bush1(m_Shader, m_CubeObject);
 	}
-	
-	TestComplexModel::~TestComplexModel()
-	{
-	}
-	
-	void TestComplexModel::OnUpdate(float deltaTime)
+
+	TestBush1::~TestBush1()
 	{
 	}
 
-	void TestComplexModel::OnRender()
+	void TestBush1::OnUpdate(float deltaTime)
+	{
+	}
+
+	void TestBush1::OnRender()
 	{
 		GLCall(glClearColor(0.8f, 0.3f, 0.8f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -75,7 +63,7 @@ namespace test {
 			m_CameraPosition + cameraLookAt,  // center
 			cameraUp); // up
 
-		
+
 		m_Shader.Bind();
 		m_Shader.SetUniformMat4f("u_Projection", m_Proj);
 		m_Shader.SetUniformMat4f("u_View", m_View);
@@ -83,10 +71,10 @@ namespace test {
 		m_Shader.SetUniform3fv("u_LightPos", m_LightPosition);
 		m_Shader.SetUniform3fv("u_ViewPos", m_CameraPosition);
 
-		m_BasicModelExtension->draw();
+		m_Bush1->draw();
 	}
-	
-	void TestComplexModel::OnImGuiRender()
+
+	void TestBush1::OnImGuiRender()
 	{
 		ImGui::SliderFloat3("Base Translation", &m_BaseTranslation.x, -50.0f, 50.0f);
 		ImGui::SliderFloat("Base Angle", &m_BaseAngle, 0.0f, 360.0f);
@@ -94,7 +82,7 @@ namespace test {
 			m_BaseAngle = 0.0f;
 			m_BaseRotation = glm::vec3(0.0f, 0.0f, 0.0f);
 		}
-		ImGui::SliderFloat3("Base Rotation", &m_BaseRotation.x, -1.0f, 1.0f);		
+		ImGui::SliderFloat3("Base Rotation", &m_BaseRotation.x, -1.0f, 1.0f);
 		ImGui::SliderFloat3("Base Scale", &m_BaseScale.x, 0.0f, 2.0f);
 		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -50.0f, 50.0f);
 		ImGui::SliderFloat3("Light", &m_LightPosition.x, -50.0f, 50.0f);

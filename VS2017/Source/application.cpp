@@ -32,6 +32,9 @@
 #include "tests/TestComplexModel.h"
 
 #include "tests/TestTerrain1.h"
+#include "tests/TestBush1.h"
+#include "tests/TestBush2.h"
+#include "tests/TestBush3.h"
 #include "tests/TestTree1.h"
 #include "tests/TestTree2.h"
 #include "tests/TestBush.h"
@@ -94,6 +97,9 @@ int main(void)
         testMenu->RegisterTest<test::TestLight>("Light");
         testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
         testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
+		    testMenu->RegisterTest<test::TestBush1>("TestBush1");
+		    testMenu->RegisterTest<test::TestBush2>("TestBush2");
+		    testMenu->RegisterTest<test::TestBush3>("TestBush3");
         testMenu->RegisterTest<test::TestTree1>("TestTree1");
         testMenu->RegisterTest<test::TestTree2>("TestTree2");
         testMenu->RegisterTest<test::TestBush>("TestBush");
