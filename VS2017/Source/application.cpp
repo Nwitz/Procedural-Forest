@@ -36,6 +36,8 @@
 #include "tests/TestBush1.h"
 #include "tests/TestBush2.h"
 #include "tests/TestBush3.h"
+#include "tests/TestGrass.h"
+#include "tests/TestRocks.h"
 
 int main(void)
 {
@@ -94,10 +96,11 @@ int main(void)
         testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
         testMenu->RegisterTest<test::TestTree1>("TestTree1");
         testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
-		testMenu->RegisterTest<test::TestBush1>("TestBush1");
-		testMenu->RegisterTest<test::TestBush2>("TestBush2");
-		testMenu->RegisterTest<test::TestBush3>("TestBush3");
-
+		    testMenu->RegisterTest<test::TestBush1>("TestBush1");
+		    testMenu->RegisterTest<test::TestBush2>("TestBush2");
+		    testMenu->RegisterTest<test::TestBush3>("TestBush3");
+        testMenu->RegisterTest<test::TestGrass>("TestGrass");
+        testMenu->RegisterTest<test::TestRocks>("TestRocks");
         
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
