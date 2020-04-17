@@ -31,8 +31,10 @@
 #include "tests/TestLight.h"
 #include "tests/TestComplexModel.h"
 
-#include "tests/TestTree1.h"
 #include "tests/TestTerrain1.h"
+#include "tests/TestTree1.h"
+#include "tests/TestTree2.h"
+#include "tests/TestBush.h"
 #include "tests/TestGrass.h"
 #include "tests/TestRocks.h"
 
@@ -91,8 +93,10 @@ int main(void)
         testMenu->RegisterTest<test::TestModel>("Model");
         testMenu->RegisterTest<test::TestLight>("Light");
         testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
-        testMenu->RegisterTest<test::TestTree1>("TestTree1");
         testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
+        testMenu->RegisterTest<test::TestTree1>("TestTree1");
+        testMenu->RegisterTest<test::TestTree2>("TestTree2");
+        testMenu->RegisterTest<test::TestBush>("TestBush");
         testMenu->RegisterTest<test::TestGrass>("TestGrass");
         testMenu->RegisterTest<test::TestRocks>("TestRocks");
         

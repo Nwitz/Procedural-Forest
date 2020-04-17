@@ -20,7 +20,7 @@ Tree1::Tree1(const Shader& shader, Object& cubeObject) : ComplexModel(shader)
 	addModel(trunk);
 
 	scale = glm::vec3(0.3f, 3.0f, 0.12f);
-	translation = glm::vec3(0.0f, 0.0f, 0.0f);
+	translation = glm::vec3(0.0f, 0.0f, 2.5f);
 	Model* trunkSide1 = new Model(cubeObject, translation, angle, rotation, scale, brown);
 	addModel(trunkSide1);
 
