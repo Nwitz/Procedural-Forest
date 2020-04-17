@@ -35,6 +35,7 @@
 #include "tests/TestTerrain1.h"
 #include "tests/TestGrass.h"
 #include "tests/TestRocks.h"
+#include "tests/TestBush.h"
 
 int main(void)
 {
@@ -95,6 +96,7 @@ int main(void)
         testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
         testMenu->RegisterTest<test::TestGrass>("TestGrass");
         testMenu->RegisterTest<test::TestRocks>("TestRocks");
+        testMenu->RegisterTest<test::TestBush>("TestBush");
         
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
