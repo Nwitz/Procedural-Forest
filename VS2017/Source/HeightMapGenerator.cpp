@@ -46,28 +46,32 @@ void HeightMapGenerator::generateHeightMap(unsigned int seed) {
 			bottom = m_HeightMap[i][j - 1] < m_HeightMap[i - 1][j] ? m_HeightMap[i][j - 1] : m_HeightMap[i - 1][j];
 			roll = rand() % 100;
 
-			if (roll < goUpChance)
-			{
-				if (top < highBound)
-					m_HeightMap[i][j] = top + 1;
-				else
+			if (top == bottom) {
+				if (roll < goUpChance)
+				{
+					if (top < highBound)
+						m_HeightMap[i][j] = top + 1;
+					else
+						m_HeightMap[i][j] = top;
+				}
+				else if (roll < goDownChance)
+				{
+					if (bottom > lowBound)
+						m_HeightMap[i][j] = bottom - 1;
+					else
+						m_HeightMap[i][j] = bottom;
+				}
+				else {
 					m_HeightMap[i][j] = top;
-				continue;
-			}
-			else if (roll < goDownChance)
-			{
-				if (bottom > lowBound)
-					m_HeightMap[i][j] = bottom - 1;
-				else
-					m_HeightMap[i][j] = bottom;
-				continue;
-			}
-			else if (roll < stayAtLowerChance)
-			{
-				m_HeightMap[i][j] = bottom;
+				}
 			}
 			else {
-				m_HeightMap[i][j] = top;
+				if (roll < 50) {
+					m_HeightMap[i][j] = top;
+				}
+				else {
+					m_HeightMap[i][j] = bottom;
+				}
 			}
 		}
 	}

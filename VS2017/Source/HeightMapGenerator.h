@@ -20,5 +20,4 @@ private:
 
 	void setTopRow(int goUpChance, int goDownChance, int lowBound, int highBound);
 	void setLeftColumn(int goUpChance, int goDownChance, int lowBound, int highBound);
-	
 };

@@ -17,7 +17,7 @@ namespace test {
 	{
 
 		// Camera parameters for view transform
-		glm::vec3 cameraLookAt(0.0f, -0.1f, -1.0f);
+		glm::vec3 cameraLookAt(-1.0f, -1.0f, -1.0f);
 		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
 
 		// Set projection matrix for shader, this won't change
@@ -35,20 +35,24 @@ namespace test {
 
 		m_Shader.Bind();
 
-		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 5);
+		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 2);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
 
 		m_complexModel = new ComplexModel(m_Shader);
 		ComplexModel* terrain;
 		glm::vec3 translation;
+		glm::vec3 scale;
 
-		int cubeSize = 5;
+		float cubeSize = 0.1f;
+		float spacing = 1.0f;
 		for (int i = 0; i < m_HeightMapGenerator->getRows(); i++) {
 			for (int j = 0; j < m_HeightMapGenerator->getColumns(); j++) {
 				terrain = new Terrain1(m_Shader, m_CubeObject);
-				translation = glm::vec3(i * cubeSize, heightMap[i][j], j * cubeSize);
+				translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2, j * spacing);
+				scale = glm::vec3(cubeSize, cubeSize, cubeSize);
 				terrain->setTranslation(translation);
+				terrain->setScale(scale);
 				terrain->computeModelMatrix();
 				m_complexModel->addComplexModel(terrain);
 			}
@@ -97,7 +101,7 @@ namespace test {
 		}
 		ImGui::SliderFloat3("Base Rotation", &m_BaseRotation.x, -1.0f, 1.0f);
 		ImGui::SliderFloat3("Base Scale", &m_BaseScale.x, 0.0f, 2.0f);
-		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -50.0f, 50.0f);
+		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -100.0f, 100.0f);
 		ImGui::SliderFloat3("Light", &m_LightPosition.x, -50.0f, 50.0f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
