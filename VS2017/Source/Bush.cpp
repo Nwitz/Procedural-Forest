@@ -66,18 +66,4 @@ Bush::Bush(const Shader& shader, Object& cubeObject) : ComplexModel(shader)
 	Model* leavesSide4 = new Model(cubeObject, translation, angle, rotation, scale, forestGreen);
 	addModel(leavesSide4);
 
-	/*
-	translation = glm::vec3(0.0f, 16.0f, -8.0f);
-	Model* leavesSide2 = new Model(cubeObject, translation, angle, rotation, scale, green);
-	addModel(leavesSide2);
-
-	scale = glm::vec3(0.3f, 0.8f, 1.3f);
-	translation = glm::vec3(8.0f, 16.0f, 0.0f);
-	Model* leavesSide3 = new Model(cubeObject, translation, angle, rotation, scale, green);
-	addModel(leavesSide3);
-
-	translation = glm::vec3(-8.0f, 16.0f, 0.0f);
-	Model* leavesSide4 = new Model(cubeObject, translation, angle, rotation, scale, green);
-	addModel(leavesSide4);
-	*/
 }
