@@ -4,8 +4,6 @@ Terrain1::Terrain1(const Shader& shader, Object& cubeObject) : ComplexModel(shad
 {
 	shader.Bind();
 
-
-	// 4 cube base with single cube on top
 	glm::vec3 translation(1.0f, 1.0f, 1.0f);
 	glm::vec3 rotation(1.0f, 1.0f, 1.0f);
 	float angle = 0.0f;
