@@ -1,0 +1,109 @@
+#pragma once
+
+#include "IndexBuffer.h"
+#include "VertexArray.h"
+#include "TestTerrainGeneration.h"
+#include "Terrain1.h"
+
+namespace test {
+
+	TestTerrainGeneration::TestTerrainGeneration()
+		: m_CubeObject("res/models/cube.obj"), m_Shader("res/shaders/basic_light.shader"),
+		m_BaseTranslation(-10.0f, 0.0f, 0.0f),
+		m_BaseRotation(1.0f, 1.0f, 1.0f),
+		m_BaseScale(0.5f, 0.5f, 0.5f),
+		m_LightPosition(0.0f, 10.0f, 40.0f), m_CameraPosition(0.0f, 10.0f, 60.0f),
+		m_Cube(m_CubeObject), m_BaseAngle(1.0f)
+	{
+
+		// Camera parameters for view transform
+		glm::vec3 cameraLookAt(-1.0f, -1.0f, -1.0f);
+		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
+
+		// Set projection matrix for shader, this won't change
+		m_Proj = glm::perspective(70.0f,            // field of view in degrees
+			1.0f,  // aspect ratio
+			0.01f, 100.0f);   // near and far (near > 0)
+
+		// Set initial view matrix
+		m_View = lookAt(m_CameraPosition,  // eye
+			m_CameraPosition + cameraLookAt,  // center
+			cameraUp); // up
+
+		GLCall(glEnable(GL_CULL_FACE));
+		glEnable(GL_DEPTH_TEST);
+
+		m_Shader.Bind();
+
+		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 10);
+		m_HeightMapGenerator->generateHeightMap();
+		int** heightMap = m_HeightMapGenerator->getHeightMap();
+
+		m_complexModel = new ComplexModel(m_Shader);
+		ComplexModel* terrain;
+		glm::vec3 translation;
+		glm::vec3 scale;
+
+		float cubeSize = 0.1f;
+		float cubeHeight = 0.4;
+		float spacing = 1.0f;
+		for (int i = 0; i < m_HeightMapGenerator->getRows(); i++) {
+			for (int j = 0; j < m_HeightMapGenerator->getColumns(); j++) {
+				terrain = new Terrain1(m_Shader, m_CubeObject);
+				translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2, j * spacing);
+				scale = glm::vec3(cubeSize, cubeHeight, cubeSize);
+				terrain->setTranslation(translation);
+				terrain->setScale(scale);
+				terrain->computeModelMatrix();
+				m_complexModel->addComplexModel(terrain);
+			}
+		}
+	}
+
+	TestTerrainGeneration::~TestTerrainGeneration()
+	{
+	}
+
+	void TestTerrainGeneration::OnUpdate(float deltaTime)
+	{
+	}
+
+	void TestTerrainGeneration::OnRender()
+	{
+		GLCall(glClearColor(0.8f, 0.3f, 0.8f, 1.0f));
+		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+		Renderer renderer;
+
+		glm::vec3 cameraLookAt(0.0f, -1.0f, -1.0f);
+		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
+		// Set initial view matrix
+		m_View = lookAt(m_CameraPosition,  // eye
+			m_CameraPosition + cameraLookAt,  // center
+			cameraUp); // up
+
+
+		m_Shader.Bind();
+		m_Shader.SetUniformMat4f("u_Projection", m_Proj);
+		m_Shader.SetUniformMat4f("u_View", m_View);
+		m_Shader.SetUniform4f("u_Color", 1.0f, 1.0f, 1.0f, 1.0f);
+		m_Shader.SetUniform3fv("u_LightPos", m_LightPosition);
+		m_Shader.SetUniform3fv("u_ViewPos", m_CameraPosition);
+
+		m_complexModel->draw(m_Shader);
+	}
+
+	void TestTerrainGeneration::OnImGuiRender()
+	{
+		ImGui::SliderFloat3("Base Translation", &m_BaseTranslation.x, -50.0f, 50.0f);
+		ImGui::SliderFloat("Base Angle", &m_BaseAngle, 0.0f, 360.0f);
+		if (ImGui::Button("Reset Angle")) {
+			m_BaseAngle = 0.0f;
+			m_BaseRotation = glm::vec3(0.0f, 0.0f, 0.0f);
+		}
+		ImGui::SliderFloat3("Base Rotation", &m_BaseRotation.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("Base Scale", &m_BaseScale.x, 0.0f, 2.0f);
+		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -100.0f, 100.0f);
+		ImGui::SliderFloat3("Light", &m_LightPosition.x, -50.0f, 50.0f);
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	}
+}

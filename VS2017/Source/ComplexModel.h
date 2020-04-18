@@ -18,8 +18,10 @@ public:
 	virtual void draw();
 	virtual void draw(Shader &shader);
 	void addModel(Model *model);
+	void addComplexModel(ComplexModel* complexModel);
 private:
 	std::vector<Model *> m_Models;
+	std::vector<ComplexModel *> m_ComplexModels;
 	Shader m_Shader;
 	glm::mat4 m_BaseTranslation;
 	glm::mat4 m_BaseRotation;

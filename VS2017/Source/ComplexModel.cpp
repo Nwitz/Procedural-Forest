@@ -59,9 +59,17 @@ void ComplexModel::draw(Shader &shader) {
     for (auto model : m_Models) {
         model->draw(shader, m_ModelMatrix);
     }
+    for (auto complexModel : m_ComplexModels) {
+        complexModel->draw(shader);
+    }
 }
 
 void ComplexModel::addModel(Model* model)
 {
     m_Models.push_back(model);
+}
+
+void ComplexModel::addComplexModel(ComplexModel* complexModel)
+{
+    m_ComplexModels.push_back(complexModel);
 }

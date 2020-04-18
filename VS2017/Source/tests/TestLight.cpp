@@ -29,6 +29,8 @@ namespace test {
 
 		GLCall(glEnable(GL_CULL_FACE));
 		glEnable(GL_DEPTH_TEST);
+
+		unsigned int uint = 5;
 	}
 	
 	TestLight::~TestLight()
