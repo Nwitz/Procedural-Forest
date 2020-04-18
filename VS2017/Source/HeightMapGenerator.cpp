@@ -30,9 +30,9 @@ void HeightMapGenerator::generateHeightMap(unsigned int seed) {
 		return;
 	}
 	
-	unsigned int goUpChance = 10;
-	unsigned int goDownChance = 20;
-	unsigned int stayAtLowerChance = 60;
+	unsigned int goUpChance = 5;
+	unsigned int goDownChance = 10;
+	unsigned int stayAtLowerChance = 55;
 	unsigned int stayAtUpper = 100;
 
 	int lowBound = -m_HeightOffset;

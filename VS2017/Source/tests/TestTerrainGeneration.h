@@ -26,6 +26,7 @@ namespace test {
 	private:
 		Object m_CubeObject;
 		ComplexModel* m_complexModel;
+		ComplexModel* m_TerrainObjects;
 		HeightMapGenerator* m_HeightMapGenerator;
 		float m_BaseAngle;
 		glm::mat4 m_Proj, m_View;
