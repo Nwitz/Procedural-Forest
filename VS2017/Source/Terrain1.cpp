@@ -15,14 +15,15 @@ Terrain1::Terrain1(const Shader& shader, Object& cubeObject) : ComplexModel(shad
 	glm::vec4 dirtBrown(0.3f, 0.15f, 0.03f, 1.0f);
 	glm::vec4 dimGray(0.412f, 0.412f, 0.412f, 1.0f);
 
+	float offset = -0.5f + 5.0f; // used to center objects 
+
 	scale = glm::vec3(1.0f, 0.9f, 1.0f);
-	translation = glm::vec3(0.0f, 0.0f, 0.0f);
+	translation = glm::vec3(0.0f, offset, 0.0f);
 	Model* dirt = new Model(cubeObject, translation, angle, rotation, scale, dirtBrown);
 	addModel(dirt);
 
 	scale = glm::vec3(1.0f, 0.1f, 1.0f);
-	translation = glm::vec3(0.0f, 5.0f, 0.0f);
+	translation = glm::vec3(0.0f, 5.0f + offset, 0.0f);
 	Model* grass = new Model(cubeObject, translation, angle, rotation, scale, limeGreen);
 	addModel(grass);
-
 }
