@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Camera.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "TestTerrainGeneration.h"
 #include "Terrain1.h"
 #include "LandscapeManager.h"
+
 
 namespace test {
 
@@ -13,28 +15,15 @@ namespace test {
 		m_BaseTranslation(-10.0f, 0.0f, 0.0f),
 		m_BaseRotation(1.0f, 1.0f, 1.0f),
 		m_BaseScale(0.5f, 0.5f, 0.5f),
-		m_LightPosition(0.0f, 10.0f, 40.0f), m_CameraPosition(0.0f, 10.0f, 60.0f),
+		m_LightPosition(0.0f, 10.0f, 40.0f), m_CameraPosition(3.0f, 6.25f, 20.0f),
 		m_Cube(m_CubeObject), m_BaseAngle(1.0f)
 	{
-
-		// Camera parameters for view transform
-		glm::vec3 cameraLookAt(-1.0f, -1.0f, -1.0f);
-		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
-
-		// Set projection matrix for shader, this won't change
-		m_Proj = glm::perspective(70.0f,            // field of view in degrees
-			1.0f,  // aspect ratio
-			0.01f, 100.0f);   // near and far (near > 0)
-
-		// Set initial view matrix
-		m_View = lookAt(m_CameraPosition,  // eye
-			m_CameraPosition + cameraLookAt,  // center
-			cameraUp); // up
-
 		GLCall(glEnable(GL_CULL_FACE));
 		glEnable(GL_DEPTH_TEST);
 
 		m_Shader.Bind();
+
+		m_Camera = new Camera(m_CameraPosition);
 
 		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 5);
 		m_HeightMapGenerator->generateHeightMap();
@@ -118,21 +107,18 @@ namespace test {
 
 	void TestTerrainGeneration::OnUpdate(float deltaTime)
 	{
+		m_Camera->Update(deltaTime);
 	}
 
 	void TestTerrainGeneration::OnRender()
 	{
-		GLCall(glClearColor(0.000f, 0.749f, 1.000f, 1.0f));
+		GLCall(glClearColor(0.8f, 0.3f, 0.8f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+
 		Renderer renderer;
 
-		glm::vec3 cameraLookAt(1.0f, 0.0f, -1.0f);
-		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
-		// Set initial view matrix
-		m_View = lookAt(m_CameraPosition,  // eye
-			m_CameraPosition + cameraLookAt,  // center
-			cameraUp); // up
-
+		m_Proj = m_Camera->GetProjectionMatrix();
+		m_View = m_Camera->GetViewMatrix();
 
 		m_Shader.Bind();
 		m_Shader.SetUniformMat4f("u_Projection", m_Proj);

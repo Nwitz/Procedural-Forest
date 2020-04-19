@@ -9,6 +9,7 @@
 #include "Model.h"
 #include "ComplexModel.h"
 #include "HeightMapGenerator.h"
+#include "Camera.h"
 
 
 namespace test {
@@ -22,7 +23,6 @@ namespace test {
 		void OnUpdate(float deltaTime) override;
 		void OnRender() override;
 		void OnImGuiRender() override;
-
 	private:
 		Object m_CubeObject;
 		ComplexModel* m_complexModel;
@@ -33,5 +33,6 @@ namespace test {
 		glm::vec3 m_BaseTranslation, m_BaseRotation, m_BaseScale, m_LightPosition, m_CameraPosition;
 		Model m_Cube;
 		Shader m_Shader;
+		Camera* m_Camera;
 	};
 }

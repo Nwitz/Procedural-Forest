@@ -5,14 +5,12 @@
 #define GLEW_STATIC 1   // This allows linking with Static Library on Windows, without DLL
 #include <GL/glew.h>    // Include GLEW - OpenGL Extension Wrangler
 
-#include <GLFW/glfw3.h> // cross-platform interface for creating a graphical context,
-                        // initializing OpenGL and binding inputs
-
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/common.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <fstream>
 #include <sstream>
+#include "EventManager.h"
 #include "Renderer.h"
 
 #include "VertexBuffer.h"
@@ -44,27 +42,8 @@
 
 int main(void)
 {
-    GLFWwindow* window;
-
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1000, 1000, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
- 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* limit frame rate */
-    glfwSwapInterval(1);
+	/* Initialize window and mouse position */
+	EventManager::Initialize();
 
     if (glewInit() != GLEW_OK) {
         std::cout << "Error!" << std::endl;
@@ -81,12 +60,10 @@ int main(void)
         GLCall(glGenVertexArrays(1, &vao));
         GLCall(glBindVertexArray(vao));
 
-  
-
         Renderer renderer;
 
         ImGui::CreateContext();
-        ImGui_ImplGlfwGL3_Init(window, true);
+        ImGui_ImplGlfwGL3_Init(EventManager::GetWindow(), true);
         ImGui::StyleColorsDark();
 
         test::Test* currentTest = nullptr;
@@ -109,7 +86,7 @@ int main(void)
         testMenu->RegisterTest<test::TestRocks>("Test Rocks");
         
         /* Loop until the user closes the window */
-        while (!glfwWindowShouldClose(window))
+        while (EventManager::CloseWindow() == false)
         {
             GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             renderer.Clear();
@@ -117,7 +94,8 @@ int main(void)
             ImGui_ImplGlfwGL3_NewFrame();
             if (currentTest)
             {
-                currentTest->OnUpdate(0.0f);
+				EventManager::Update();
+                currentTest->OnUpdate(EventManager::GetFrameTime());
                 currentTest->OnRender();
                 ImGui::Begin("Test");
                 if (currentTest != testMenu && ImGui::Button("<-"))
@@ -132,7 +110,7 @@ int main(void)
             ImGui::Render();
             ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(EventManager::GetWindow());
 
             glfwPollEvents();
 		}
@@ -142,6 +120,6 @@ int main(void)
     }
     ImGui_ImplGlfwGL3_Shutdown();
     ImGui::DestroyContext();
-    glfwTerminate();
+	EventManager::Shutdown();
     return 0;
 }
