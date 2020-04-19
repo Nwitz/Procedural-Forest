@@ -4,10 +4,6 @@
 #include "VertexArray.h"
 #include "TestTerrainGeneration.h"
 #include "Terrain1.h"
-#include "Bush.h"
-#include "Rocks.h"
-#include "Tree1.h"
-#include "Grass.h"
 #include "LandscapeManager.h"
 
 namespace test {
@@ -82,7 +78,7 @@ namespace test {
 
 					m_TerrainObjects->addComplexModel(landscapeModel);
 				}
-				else if (objectMap[i][j] == 1 && rand() % 100 < 20) {
+				else if (objectMap[i][j] == 1 && rand() % 100 < 40) {
 					landscapeModel = landscapeManager.getMediumLandscapeObject(m_Shader);
 					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
 					m_HeightMapGenerator->occupyPosition(i, j);
@@ -92,7 +88,7 @@ namespace test {
 					m_TerrainObjects->addComplexModel(landscapeModel);
 				}
 				else {
-					if (rand() % 100 < 20) {
+					if (rand() % 100 < 50) {
 						landscapeModel = new Grass(m_Shader, m_CubeObject);
 						translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
 						landscapeModel->setTranslation(translation);
