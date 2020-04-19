@@ -74,7 +74,7 @@ int main(void)
         // testMenu->RegisterTest<test::TestModel>("Model");
         // testMenu->RegisterTest<test::TestLight>("Light");
         // testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
-        testMenu->RegisterTest<test::TestTerrainGeneration>("Test Terrain Generation");
+        testMenu->RegisterTest<test::TestTerrainGeneration>("Generate Terrain");
         testMenu->RegisterTest<test::TestTerrain1>("Test Terrain1");
         testMenu->RegisterTest<test::TestBush>("Test Bush");
 		testMenu->RegisterTest<test::TestBush1>("Test Bush1");
