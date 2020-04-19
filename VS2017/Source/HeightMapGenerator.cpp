@@ -134,6 +134,7 @@ void HeightMapGenerator::generateFlat()
 {
 	for (int i = 0; i < m_Rows; i++) {
 		for (int j = 0; j < m_Columns; j++) {
+			
 			m_HeightMap[i][j] = 0;
 			if (i > 1 && i < m_Rows - 2 && j > 1 && j < m_Rows - 2)
 				m_ObjectMap[i][j] = 2;
@@ -141,6 +142,7 @@ void HeightMapGenerator::generateFlat()
 				m_ObjectMap[i][j] = 0;
 		}
 	}
+	flattenOutliers();
 }
 
 void HeightMapGenerator::flattenOutliers()
@@ -154,16 +156,20 @@ void HeightMapGenerator::flattenOutliers()
 
 void HeightMapGenerator::flattenIfNeeded(int row, int col)
 {
-	int height = m_HeightMap[row][col - 1];
+	int height = m_HeightMap[row][col];
+	int lowest = height;
 	for (int i = row - 1; i <= row + 1; i++) {
-		for (int j = row - 1; j <= col + 1; j++) {
-			if (i == row && j == row)
+		for (int j = col - 1; j <= col + 1; j++) {
+			if (i == row && j == col)
 				continue;
-			if (m_HeightMap[i][j] != height)
+			if (m_HeightMap[i][j] == height)
 				return;
+			if (m_HeightMap[i][j] < lowest)
+				lowest = m_HeightMap[i][j];
 		}
 	}
-	m_HeightMap[row][col] = height;
+
+	m_HeightMap[row][col] = lowest;
 }
 
 void HeightMapGenerator::generateObjectMap()

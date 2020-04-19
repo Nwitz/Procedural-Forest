@@ -25,7 +25,7 @@ namespace test {
 
 		m_Camera = new Camera(m_CameraPosition);
 
-		m_HeightMapGenerator = new HeightMapGenerator(20, 20, 5);
+		m_HeightMapGenerator = new HeightMapGenerator(30, 30, 5);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
 		int** objectMap = m_HeightMapGenerator->getObjectMap();
@@ -57,7 +57,7 @@ namespace test {
 				terrain->computeModelMatrix();
 				m_complexModel->addComplexModel(terrain);
 
-				 // create tree if large, create rock if small
+				// create tree if large, create rock if small
 				if (objectMap[i][j] == 2) {
 					landscapeModel = landscapeManager.getLargeLandscapeObject(m_Shader);
 					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
