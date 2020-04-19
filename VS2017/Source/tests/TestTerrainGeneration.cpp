@@ -25,7 +25,7 @@ namespace test {
 
 		m_Camera = new Camera(m_CameraPosition);
 
-		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 5);
+		m_HeightMapGenerator = new HeightMapGenerator(20, 20, 5);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
 		int** objectMap = m_HeightMapGenerator->getObjectMap();
