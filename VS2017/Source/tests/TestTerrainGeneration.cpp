@@ -4,6 +4,10 @@
 #include "VertexArray.h"
 #include "TestTerrainGeneration.h"
 #include "Terrain1.h"
+#include "Bush.h"
+#include "Rocks.h"
+#include "Tree1.h"
+#include "Grass.h"
 
 namespace test {
 
@@ -35,29 +39,81 @@ namespace test {
 
 		m_Shader.Bind();
 
-		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 10);
+		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 5);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
+		int** objectMap = m_HeightMapGenerator->getObjectMap();
 
 		m_complexModel = new ComplexModel(m_Shader);
+		m_TerrainObjects = new ComplexModel(m_Shader);
 		ComplexModel* terrain;
+		ComplexModel* landscapeModel;
 		glm::vec3 translation;
-		glm::vec3 scale;
+		glm::vec3 scale, landscapeScale;
 
+		float baseHalfCubeLength = 5;
 		float cubeSize = 0.1f;
-		float cubeHeight = 0.4;
-		float spacing = 1.0f;
+
+		float cubeHeight = 4 * cubeSize;
+		float objectOffset = baseHalfCubeLength * 2 * cubeHeight;
+		float spacing = 2 * cubeSize * baseHalfCubeLength;
+		scale = glm::vec3(cubeSize, cubeHeight, cubeSize);
+		landscapeScale = glm::vec3(cubeSize, cubeSize, cubeSize);
+		srand(time(NULL));
+
 		for (int i = 0; i < m_HeightMapGenerator->getRows(); i++) {
 			for (int j = 0; j < m_HeightMapGenerator->getColumns(); j++) {
 				terrain = new Terrain1(m_Shader, m_CubeObject);
-				translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2, j * spacing);
-				scale = glm::vec3(cubeSize, cubeHeight, cubeSize);
+				translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2, j * spacing); // levels are half a cube difference in height
 				terrain->setTranslation(translation);
 				terrain->setScale(scale);
 				terrain->computeModelMatrix();
 				m_complexModel->addComplexModel(terrain);
+
+				 // create tree if large, create rock if small
+				if (objectMap[i][j] == 2 && rand() % 100 < 40) {
+					landscapeModel = new Tree1(m_Shader, m_CubeObject);
+					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
+					landscapeModel->setTranslation(translation);
+					landscapeModel->setScale(landscapeScale);
+					landscapeModel->computeModelMatrix();
+					m_HeightMapGenerator->occupyPosition(i, j);
+
+					m_TerrainObjects->addComplexModel(landscapeModel);
+				}
+				else if (objectMap[i][j] == 1 && rand() % 100 < 20) {
+					landscapeModel = new Rocks(m_Shader, m_CubeObject);
+					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
+					m_HeightMapGenerator->occupyPosition(i, j);
+					landscapeModel->setTranslation(translation);
+					landscapeModel->setScale(landscapeScale / 2.0f);
+					landscapeModel->computeModelMatrix();
+
+					m_TerrainObjects->addComplexModel(landscapeModel);
+				}
+				else {
+					if (rand() % 100 < 10) {
+						landscapeModel = new Grass(m_Shader, m_CubeObject);
+						translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
+						landscapeModel->setTranslation(translation);
+						m_HeightMapGenerator->occupyPosition(i, j);
+						landscapeModel->setScale(landscapeScale / 2.0f);
+						landscapeModel->computeModelMatrix();
+
+						m_TerrainObjects->addComplexModel(landscapeModel);
+					}
+				}
 			}
 		}
+
+		
+		// example of a cube that will line up exactly with top of given base
+		landscapeModel = new Terrain1(m_Shader, m_CubeObject);
+		translation = glm::vec3(-1 * spacing, heightMap[0][0] * spacing / 2 + objectOffset, -1 * spacing);
+		landscapeModel->setTranslation(translation);
+		landscapeModel->setScale(landscapeScale);
+		landscapeModel->computeModelMatrix();
+		m_complexModel->addComplexModel(landscapeModel);
 	}
 
 	TestTerrainGeneration::~TestTerrainGeneration()
@@ -74,7 +130,7 @@ namespace test {
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 		Renderer renderer;
 
-		glm::vec3 cameraLookAt(0.0f, -1.0f, -1.0f);
+		glm::vec3 cameraLookAt(1.0f, 0.0f, -1.0f);
 		glm::vec3 cameraUp(0.0f, 1.0f, 0.0f);
 		// Set initial view matrix
 		m_View = lookAt(m_CameraPosition,  // eye
@@ -90,6 +146,7 @@ namespace test {
 		m_Shader.SetUniform3fv("u_ViewPos", m_CameraPosition);
 
 		m_complexModel->draw(m_Shader);
+		m_TerrainObjects->draw(m_Shader);
 	}
 
 	void TestTerrainGeneration::OnImGuiRender()
