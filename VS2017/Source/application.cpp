@@ -92,21 +92,21 @@ int main(void)
         test::Test* currentTest = nullptr;
         test::TestMenu* testMenu = new test::TestMenu(currentTest);
         currentTest = testMenu;
-        testMenu->RegisterTest<test::TestClearColor>("Clear Color");
-        testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
-        testMenu->RegisterTest<test::TestModel>("Model");
-        testMenu->RegisterTest<test::TestLight>("Light");
-        testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
-        testMenu->RegisterTest<test::TestTerrain1>("TestTerrain1");
-		testMenu->RegisterTest<test::TestBush1>("TestBush1");
-		testMenu->RegisterTest<test::TestBush2>("TestBush2");
-		testMenu->RegisterTest<test::TestBush3>("TestBush3");
-        testMenu->RegisterTest<test::TestTree1>("TestTree1");
-        testMenu->RegisterTest<test::TestTree2>("TestTree2");
-        testMenu->RegisterTest<test::TestBush>("TestBush");
-        testMenu->RegisterTest<test::TestGrass>("TestGrass");
-        testMenu->RegisterTest<test::TestRocks>("TestRocks");
+        // testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+        // testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
+        // testMenu->RegisterTest<test::TestModel>("Model");
+        // testMenu->RegisterTest<test::TestLight>("Light");
+        // testMenu->RegisterTest<test::TestComplexModel>("ComplexModel");
         testMenu->RegisterTest<test::TestTerrainGeneration>("Test Terrain Generation");
+        testMenu->RegisterTest<test::TestTerrain1>("Test Terrain1");
+        testMenu->RegisterTest<test::TestBush>("Test Bush");
+		testMenu->RegisterTest<test::TestBush1>("Test Bush1");
+		testMenu->RegisterTest<test::TestBush2>("Test Bush2");
+		testMenu->RegisterTest<test::TestBush3>("Test Bush3");
+        testMenu->RegisterTest<test::TestTree1>("Test Tree1");
+        testMenu->RegisterTest<test::TestTree2>("Test Tree2");
+        testMenu->RegisterTest<test::TestGrass>("Test Grass");
+        testMenu->RegisterTest<test::TestRocks>("Test Rocks");
         
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
