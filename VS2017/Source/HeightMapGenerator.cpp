@@ -84,6 +84,7 @@ void HeightMapGenerator::generateHeightMap(unsigned int seed) {
 		}
 	}
 
+	flattenOutliers();
 	generateObjectMap();
 }
 
@@ -140,6 +141,29 @@ void HeightMapGenerator::generateFlat()
 				m_ObjectMap[i][j] = 0;
 		}
 	}
+}
+
+void HeightMapGenerator::flattenOutliers()
+{
+	for (int i = 1; i < m_Rows - 1; i++) {
+		for (int j = 1; j < m_Columns - 1; j++) {
+			flattenIfNeeded(i, j);
+		}
+	}
+}
+
+void HeightMapGenerator::flattenIfNeeded(int row, int col)
+{
+	int height = m_HeightMap[row][col - 1];
+	for (int i = row - 1; i <= row + 1; i++) {
+		for (int j = row - 1; j <= col + 1; j++) {
+			if (i == row && j == row)
+				continue;
+			if (m_HeightMap[i][j] != height)
+				return;
+		}
+	}
+	m_HeightMap[row][col] = height;
 }
 
 void HeightMapGenerator::generateObjectMap()

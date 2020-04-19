@@ -23,11 +23,13 @@ private:
 	int** m_HeightMap;
 	int** m_ObjectMap;
 
+	void flattenOutliers();
+	void flattenIfNeeded(int row, int col);
 	void generateObjectMap();
 
 	void setTopRow(int goUpChance, int goDownChance, int lowBound, int highBound);
 	void setLeftColumn(int goUpChance, int goDownChance, int lowBound, int highBound);
 
 	bool canPlaceLarge(int, int);
-	bool  canPlaceMedium(int, int);
+	bool canPlaceMedium(int, int);
 };
