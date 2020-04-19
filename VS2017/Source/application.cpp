@@ -86,7 +86,7 @@ int main(void)
         testMenu->RegisterTest<test::TestRocks>("Test Rocks");
         
         /* Loop until the user closes the window */
-        while (!glfwWindowShouldClose(EventManager::GetWindow()))
+        while (EventManager::CloseWindow() == false)
         {
             GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             renderer.Clear();

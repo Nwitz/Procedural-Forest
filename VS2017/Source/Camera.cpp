@@ -29,7 +29,10 @@ glm::mat4 Camera::GetViewMatrix() const
 
 void Camera::Update(float dt)
 {
-	// mouse motion to get the variation in angle
+	/* disable mouse cursor */
+	EventManager::EnableMouseCursor();
+
+	/* mouse motion to get the variation in angle */
 	mHorizontalAngle -= EventManager::GetMouseMotionX() * mAngularSpeed * dt;
 	mVerticalAngle -= EventManager::GetMouseMotionY() * mAngularSpeed * dt;
 
@@ -51,8 +54,7 @@ void Camera::Update(float dt)
 	vec3 sideVector = glm::cross(mLookAt, vec3(0.0f, 1.0f, 0.0f));
 	glm::normalize(sideVector);
 
-	// WASD movement
-	// movement in y is locked when pressing W or S
+	/* WASD movement (movement in y is locked when pressing W or S) */
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
 	{
 		mPosition += mLookAt * vec3(1.0f, 0.0f, 1.0f) * dt * mSpeed;

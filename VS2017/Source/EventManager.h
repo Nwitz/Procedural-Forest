@@ -11,8 +11,12 @@ public:
 
 	static float GetFrameTime();
 	static GLFWwindow* GetWindow();
+	static bool CloseWindow();
+
 	static float GetMouseMotionX();
 	static float GetMouseMotionY();
+
+	static void EnableMouseCursor();
 
 private:
 	// Time

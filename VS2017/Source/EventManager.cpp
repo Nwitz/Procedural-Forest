@@ -90,6 +90,11 @@ GLFWwindow* EventManager::GetWindow()
 	return spWindow;
 }
 
+bool EventManager::CloseWindow()
+{
+	return glfwGetKey(spWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(spWindow);
+}
+
 float EventManager::GetMouseMotionX()
 {
 	return sMouseDeltaX;
@@ -98,4 +103,9 @@ float EventManager::GetMouseMotionX()
 float EventManager::GetMouseMotionY()
 {
 	return sMouseDeltaY;
+}
+
+void EventManager::EnableMouseCursor()
+{
+	glfwSetInputMode(spWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
