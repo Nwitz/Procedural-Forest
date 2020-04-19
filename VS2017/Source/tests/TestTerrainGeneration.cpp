@@ -8,7 +8,6 @@
 #include "Rocks.h"
 #include "Tree1.h"
 #include "Grass.h"
-#include <iostream>
 
 namespace test {
 
@@ -71,8 +70,6 @@ namespace test {
 				terrain->computeModelMatrix();
 				m_complexModel->addComplexModel(terrain);
 
-				std::cout << objectMap[i][j] << " ";
-
 				 // create tree if large, create rock if small
 				if (objectMap[i][j] == 2 && rand() % 100 < 40) {
 					landscapeModel = new Tree1(m_Shader, m_CubeObject);
@@ -107,7 +104,6 @@ namespace test {
 					}
 				}
 			}
-			std::cout << std::endl;
 		}
 
 		
