@@ -10,6 +10,7 @@ public:
 	void generateFlat();
 	int** getHeightMap();
 	int** getObjectMap();
+	void occupyPosition(int row, int col);
 	unsigned int getRows();
 	unsigned int getColumns();
 

@@ -40,7 +40,7 @@ namespace test {
 
 		m_Shader.Bind();
 
-		m_HeightMapGenerator = new HeightMapGenerator(20, 20, 5);
+		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 5);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
 		int** objectMap = m_HeightMapGenerator->getObjectMap();
@@ -80,12 +80,14 @@ namespace test {
 					landscapeModel->setTranslation(translation);
 					landscapeModel->setScale(landscapeScale);
 					landscapeModel->computeModelMatrix();
+					m_HeightMapGenerator->occupyPosition(i, j);
 
 					m_TerrainObjects->addComplexModel(landscapeModel);
 				}
 				else if (objectMap[i][j] == 1 && rand() % 100 < 20) {
 					landscapeModel = new Rocks(m_Shader, m_CubeObject);
 					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
+					m_HeightMapGenerator->occupyPosition(i, j);
 					landscapeModel->setTranslation(translation);
 					landscapeModel->setScale(landscapeScale / 2.0f);
 					landscapeModel->computeModelMatrix();
@@ -97,6 +99,7 @@ namespace test {
 						landscapeModel = new Grass(m_Shader, m_CubeObject);
 						translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
 						landscapeModel->setTranslation(translation);
+						m_HeightMapGenerator->occupyPosition(i, j);
 						landscapeModel->setScale(landscapeScale / 2.0f);
 						landscapeModel->computeModelMatrix();
 

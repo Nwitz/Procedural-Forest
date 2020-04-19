@@ -134,6 +134,10 @@ void HeightMapGenerator::generateFlat()
 	for (int i = 0; i < m_Rows; i++) {
 		for (int j = 0; j < m_Columns; j++) {
 			m_HeightMap[i][j] = 0;
+			if (i > 1 && i < m_Rows - 2 && j > 1 && j < m_Rows - 2)
+				m_ObjectMap[i][j] = 2;
+			else 
+				m_ObjectMap[i][j] = 0;
 		}
 	}
 }
@@ -185,6 +189,8 @@ bool HeightMapGenerator::canPlaceMedium(int row, int col) {
 	return true;
 }
 
+
+
 int** HeightMapGenerator::getHeightMap()
 {
 	return m_HeightMap;
@@ -193,6 +199,18 @@ int** HeightMapGenerator::getHeightMap()
 int** HeightMapGenerator::getObjectMap()
 {
 	return m_ObjectMap;
+}
+
+void HeightMapGenerator::occupyPosition(int row, int col)
+{
+	int offset = m_ObjectMap[row][col];
+
+	for (int i = row - offset; i <= row + offset; i++) {
+		for (int j = col - offset; j <= col + offset; j++) {
+			if (m_ObjectMap[i][j] == offset)
+				m_ObjectMap[i][j]--;
+		}
+	}
 }
 
 unsigned int HeightMapGenerator::getRows()
