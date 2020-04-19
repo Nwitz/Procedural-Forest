@@ -90,15 +90,6 @@ namespace test {
 				}
 			}
 		}
-
-		
-		// example of a cube that will line up exactly with top of given base
-		landscapeModel = new Terrain1(m_Shader, m_CubeObject);
-		translation = glm::vec3(-1 * spacing, heightMap[0][0] * spacing / 2 + objectOffset, -1 * spacing);
-		landscapeModel->setTranslation(translation);
-		landscapeModel->setScale(landscapeScale);
-		landscapeModel->computeModelMatrix();
-		m_complexModel->addComplexModel(landscapeModel);
 	}
 
 	TestTerrainGeneration::~TestTerrainGeneration()

@@ -29,9 +29,6 @@ glm::mat4 Camera::GetViewMatrix() const
 
 void Camera::Update(float dt)
 {
-	/* disable mouse cursor */
-	EventManager::EnableMouseCursor();
-
 	/* mouse motion to get the variation in angle */
 	mHorizontalAngle -= EventManager::GetMouseMotionX() * mAngularSpeed * dt;
 	mVerticalAngle -= EventManager::GetMouseMotionY() * mAngularSpeed * dt;
@@ -73,5 +70,17 @@ void Camera::Update(float dt)
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
 	{
 		mPosition -= sideVector * dt * mSpeed;
+	}
+
+	// toggle cursor on
+	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_N) == GLFW_PRESS)
+	{
+		glfwSetInputMode(EventManager::GetWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+
+	// toggle cursor off
+	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_M) == GLFW_PRESS)
+	{
+		glfwSetInputMode(EventManager::GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 }
