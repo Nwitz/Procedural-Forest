@@ -54,15 +54,15 @@ void Camera::Update(float dt)
 	vec3 sideVector = glm::cross(mLookAt, vec3(0.0f, 1.0f, 0.0f));
 	glm::normalize(sideVector);
 
-	/* WASD movement (movement in y is locked when pressing W or S) */
+	/* WASD movement */
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
 	{
-		mPosition += mLookAt * vec3(1.0f, 0.0f, 1.0f) * dt * mSpeed;
+		mPosition += mLookAt * dt * mSpeed;
 	}
 
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_S) == GLFW_PRESS)
 	{
-		mPosition -= mLookAt * vec3(1.0f, 0.0f, 1.0f) * dt * mSpeed;
+		mPosition -= mLookAt * dt * mSpeed;
 	}
 
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
