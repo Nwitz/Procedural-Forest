@@ -103,7 +103,7 @@ namespace test {
 
 	void TestTerrainGeneration::OnRender()
 	{
-		GLCall(glClearColor(0.8f, 0.3f, 0.8f, 1.0f));
+		GLCall(glClearColor(0.000f, 0.749f, 1.000f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 		Renderer renderer;
