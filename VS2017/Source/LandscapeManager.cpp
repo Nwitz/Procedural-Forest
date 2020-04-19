@@ -19,9 +19,11 @@ ComplexModel* LandscapeManager::getLargeLandscapeObject(Shader &shader)
 	ComplexModel* complexModel;
 	if (rand() % 100 < 50) {
 		complexModel = new Tree1(shader, m_CubeObject);
+		complexModel->setScale(glm::vec3(m_Scale));
 	}
 	else {
 		complexModel = new Tree2(shader, m_CubeObject);
+		complexModel->setScale(glm::vec3(m_Scale));
 	}
 
 	return complexModel;
@@ -47,6 +49,7 @@ ComplexModel* LandscapeManager::getMediumLandscapeObject(Shader& shader)
 	else {
 		complexModel = new Rocks(shader, m_CubeObject);
 	}
+	complexModel->setScale(glm::vec3(m_Scale));
 
 	return complexModel;
 }
