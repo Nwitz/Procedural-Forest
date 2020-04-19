@@ -4,10 +4,7 @@
 #include "VertexArray.h"
 #include "TestTerrainGeneration.h"
 #include "Terrain1.h"
-#include "Bush.h"
-#include "Rocks.h"
-#include "Tree1.h"
-#include "Grass.h"
+#include "LandscapeManager.h"
 
 namespace test {
 
@@ -61,6 +58,7 @@ namespace test {
 		landscapeScale = glm::vec3(cubeSize, cubeSize, cubeSize);
 		srand(time(NULL));
 
+		LandscapeManager landscapeManager(cubeSize, m_CubeObject);
 		for (int i = 0; i < m_HeightMapGenerator->getRows(); i++) {
 			for (int j = 0; j < m_HeightMapGenerator->getColumns(); j++) {
 				terrain = new Terrain1(m_Shader, m_CubeObject);
@@ -71,28 +69,26 @@ namespace test {
 				m_complexModel->addComplexModel(terrain);
 
 				 // create tree if large, create rock if small
-				if (objectMap[i][j] == 2 && rand() % 100 < 40) {
-					landscapeModel = new Tree1(m_Shader, m_CubeObject);
+				if (objectMap[i][j] == 2) {
+					landscapeModel = landscapeManager.getLargeLandscapeObject(m_Shader);
 					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
 					landscapeModel->setTranslation(translation);
-					landscapeModel->setScale(landscapeScale);
 					landscapeModel->computeModelMatrix();
 					m_HeightMapGenerator->occupyPosition(i, j);
 
 					m_TerrainObjects->addComplexModel(landscapeModel);
 				}
-				else if (objectMap[i][j] == 1 && rand() % 100 < 20) {
-					landscapeModel = new Rocks(m_Shader, m_CubeObject);
+				else if (objectMap[i][j] == 1 && rand() % 100 < 40) {
+					landscapeModel = landscapeManager.getMediumLandscapeObject(m_Shader);
 					translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
 					m_HeightMapGenerator->occupyPosition(i, j);
 					landscapeModel->setTranslation(translation);
-					landscapeModel->setScale(landscapeScale / 2.0f);
 					landscapeModel->computeModelMatrix();
 
 					m_TerrainObjects->addComplexModel(landscapeModel);
 				}
 				else {
-					if (rand() % 100 < 10) {
+					if (rand() % 100 < 50) {
 						landscapeModel = new Grass(m_Shader, m_CubeObject);
 						translation = glm::vec3(i * spacing, heightMap[i][j] * spacing / 2 + objectOffset, j * spacing);
 						landscapeModel->setTranslation(translation);
