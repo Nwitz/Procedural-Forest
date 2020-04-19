@@ -25,7 +25,7 @@ namespace test {
 
 		m_Camera = new Camera(m_CameraPosition);
 
-		m_HeightMapGenerator = new HeightMapGenerator(50, 50, 5);
+		m_HeightMapGenerator = new HeightMapGenerator(20, 20, 5);
 		m_HeightMapGenerator->generateHeightMap();
 		int** heightMap = m_HeightMapGenerator->getHeightMap();
 		int** objectMap = m_HeightMapGenerator->getObjectMap();
@@ -90,15 +90,6 @@ namespace test {
 				}
 			}
 		}
-
-		
-		// example of a cube that will line up exactly with top of given base
-		landscapeModel = new Terrain1(m_Shader, m_CubeObject);
-		translation = glm::vec3(-1 * spacing, heightMap[0][0] * spacing / 2 + objectOffset, -1 * spacing);
-		landscapeModel->setTranslation(translation);
-		landscapeModel->setScale(landscapeScale);
-		landscapeModel->computeModelMatrix();
-		m_complexModel->addComplexModel(landscapeModel);
 	}
 
 	TestTerrainGeneration::~TestTerrainGeneration()
