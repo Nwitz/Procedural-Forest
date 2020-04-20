@@ -21,7 +21,7 @@ namespace test {
 
 		// Set projection matrix for shader, this won't change
 		m_Proj = glm::perspective(70.0f,            // field of view in degrees
-			1.0f,  // aspect ratio
+			16.0f / 9.0f,  // aspect ratio
 			0.01f, 100.0f);   // near and far (near > 0)
 
 		// Set initial view matrix
