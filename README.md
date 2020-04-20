@@ -1,7 +1,6 @@
 # Procedural-Forest
-Final Project - Group 5
-
-COMP371 – Computer Graphics
+# Final Project - Group 5
+# Concordia University - COMP371 – Computer Graphics - Winter 2020
   
 - Mair Elbaz - 40004558
 - Daniel Vigny-Pau - 40034769
@@ -9,10 +8,6 @@ COMP371 – Computer Graphics
 - Dania Kalomiris - 40005674
 
 Presented to Kaustubha Mendhurwar & Sudhir Mudur
- 
-Winter 2020
-
-Concordia University
 
 
 Upon running the application, the following options are presented.
