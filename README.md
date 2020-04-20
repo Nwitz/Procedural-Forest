@@ -11,6 +11,9 @@ Concordia University - COMP371 – Computer Graphics - Winter 2020
 ## Guide
 To run the project, head to the folder VS2017 and run the file Labs.sln
 
+If there are any errors, try downloading the entire project from Google Drive here: https://drive.google.com/file/d/1nJedXxVr146ExjQ_M9HElgUtnWYO9dK3/view?usp=sharing
+
+
 Upon running the application, the following options are presented.
 - *Generate Terrain*: Create and view a new procedurally generated terrain.
 - *Test Terrain1*: view an instance of `Terrain1`
