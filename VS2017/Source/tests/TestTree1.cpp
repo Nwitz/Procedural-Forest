@@ -71,23 +71,12 @@ namespace test {
 		m_Shader.SetUniform3fv("u_LightPos", m_LightPosition);
 		m_Shader.SetUniform3fv("u_ViewPos", m_CameraPosition);
 
-		// m_complexModel->setTransforms(m_BaseTranslation, m_BaseAngle, m_BaseRotation, m_BaseScale);
-
-		// m_complexModel->draw();
 
 		m_Tree1->draw();
 	}
 
 	void TestTree1::OnImGuiRender()
 	{
-		ImGui::SliderFloat3("Base Translation", &m_BaseTranslation.x, -50.0f, 50.0f);
-		ImGui::SliderFloat("Base Angle", &m_BaseAngle, 0.0f, 360.0f);
-		if (ImGui::Button("Reset Angle")) {
-			m_BaseAngle = 0.0f;
-			m_BaseRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-		}
-		ImGui::SliderFloat3("Base Rotation", &m_BaseRotation.x, -1.0f, 1.0f);
-		ImGui::SliderFloat3("Base Scale", &m_BaseScale.x, 0.0f, 2.0f);
 		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -50.0f, 50.0f);
 		ImGui::SliderFloat3("Light", &m_LightPosition.x, -50.0f, 50.0f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
