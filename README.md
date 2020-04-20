@@ -9,6 +9,8 @@ Concordia University - COMP371 – Computer Graphics - Winter 2020
 - Dania Kalomiris - 40005674
 
 ## Guide
+To run the project, head to the folder VS2017 and run the file Labs.sln
+
 Upon running the application, the following options are presented.
 - *Generate Terrain*: Create and view a new procedurally generated terrain.
 - *Test Terrain1*: view an instance of `Terrain1`
