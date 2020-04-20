@@ -76,14 +76,6 @@ namespace test {
 
 	void TestBush3::OnImGuiRender()
 	{
-		ImGui::SliderFloat3("Base Translation", &m_BaseTranslation.x, -50.0f, 50.0f);
-		ImGui::SliderFloat("Base Angle", &m_BaseAngle, 0.0f, 360.0f);
-		if (ImGui::Button("Reset Angle")) {
-			m_BaseAngle = 0.0f;
-			m_BaseRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-		}
-		ImGui::SliderFloat3("Base Rotation", &m_BaseRotation.x, -1.0f, 1.0f);
-		ImGui::SliderFloat3("Base Scale", &m_BaseScale.x, 0.0f, 2.0f);
 		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -50.0f, 50.0f);
 		ImGui::SliderFloat3("Light", &m_LightPosition.x, -50.0f, 50.0f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
