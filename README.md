@@ -1,4 +1,19 @@
 # Procedural-Forest
+Final Project - Group 5
+
+COMP371 – Computer Graphics
+  
+- Mair Elbaz - 40004558
+- Daniel Vigny-Pau - 40034769
+- Noah Horowitz - 40033784
+- Dania Kalomiris - 40005674
+
+Presented to Kaustubha Mendhurwar & Sudhir Mudur
+ 
+Winter 2020
+
+Concordia University
+
 
 Upon running the application, the following options are presented.
 - *Generate Terrain*: Create and view a new procedurally generated terrain.
