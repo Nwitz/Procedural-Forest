@@ -9,7 +9,7 @@
 
 using namespace glm;
 
-Camera::Camera(glm::vec3 position) :  mPosition(position), mLookAt(0.0f, 0.0f, -1.0f), mHorizontalAngle(90.0f), mVerticalAngle(0.0f), mSpeed(2.5f), mAngularSpeed(1.0f)
+Camera::Camera(glm::vec3 position) :  mPosition(position), mLookAt(0.0f, 0.0f, -1.0f), mHorizontalAngle(90.0f), mVerticalAngle(0.0f), mSpeed(2.5f), mAngularSpeed(2.0f)
 {
 }
 
