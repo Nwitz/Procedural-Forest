@@ -29,7 +29,7 @@ void EventManager::Initialize()
 		exit(-1);
 	}
 
-	spWindow = glfwCreateWindow(1000, 1000, "Procedural Forest", NULL, NULL);
+	spWindow = glfwCreateWindow(1280, 720, "Procedural Forest", NULL, NULL);
 
 	if (spWindow == nullptr)
 	{
