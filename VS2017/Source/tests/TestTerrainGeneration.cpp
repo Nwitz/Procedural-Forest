@@ -124,7 +124,6 @@ namespace test {
 
 	void TestTerrainGeneration::OnImGuiRender()
 	{
-		ImGui::SliderFloat3("Camera", &m_CameraPosition.x, -100.0f, 100.0f);
 		ImGui::SliderFloat3("Light", &m_LightPosition.x, -50.0f, 50.0f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
