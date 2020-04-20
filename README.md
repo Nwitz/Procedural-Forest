@@ -8,6 +8,9 @@ Concordia University - COMP371 – Computer Graphics - Winter 2020
 - Noah Horowitz - 40033784
 - Dania Kalomiris - 40005674
 
+## Video Demonstration
+https://youtu.be/mI86BRqBofA
+
 ## Guide
 To run the project, head to the folder VS2017 and run the file Labs.sln
 
