@@ -1,15 +1,14 @@
-# Procedural-Forest
-# Final Project - Group 5
-# Concordia University - COMP371 – Computer Graphics - Winter 2020
-  
+# Procedural Forest - Final Project - Group 5
+
+Concordia University - COMP371 – Computer Graphics - Winter 2020
+
+## Members
 - Mair Elbaz - 40004558
 - Daniel Vigny-Pau - 40034769
 - Noah Horowitz - 40033784
 - Dania Kalomiris - 40005674
 
-Presented to Kaustubha Mendhurwar & Sudhir Mudur
-
-
+## Guide
 Upon running the application, the following options are presented.
 - *Generate Terrain*: Create and view a new procedurally generated terrain.
 - *Test Terrain1*: view an instance of `Terrain1`
@@ -22,6 +21,7 @@ Upon running the application, the following options are presented.
 - *Test Grass*: view an instance of `Grass`
 - *Test Rocks*: view an instance of `Rocks`
 
+## Controls
 Controls for navigating the generated terrain:
 - `W`: move camera forward
 - `S`: move camera backwards
