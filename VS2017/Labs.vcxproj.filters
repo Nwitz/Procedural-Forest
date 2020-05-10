@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Source\vendor\stb_image\stb_image.h" />
+    <ClInclude Include="Source\vendor\imgui\stb_truetype.h" />
+    <ClInclude Include="Source\vendor\imgui\stb_rect_pack.h" />
+    <ClInclude Include="Source\vendor\imgui\stb_textedit.h" />
+    <ClInclude Include="Source\vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="Source\vendor\imgui\imconfig.h" />
+    <ClInclude Include="Source\vendor\imgui\imgui.h" />
+    <ClInclude Include="Source\vendor\imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="Source\IndexBuffer.h" />
+    <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Object.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\VertexArray.h" />
+    <ClInclude Include="Source\VertexBuffer.h" />
+    <ClInclude Include="Source\VertexBufferLayout.h" />
+    <ClInclude Include="Source\tests\TestTexture2D.h" />
+    <ClInclude Include="Source\tests\Test.h" />
+    <ClInclude Include="Source\tests\TestClearColor.h" />
+    <ClInclude Include="Source\tests\TestLight.h" />
+    <ClInclude Include="Source\tests\TestModel.h" />
+    <ClInclude Include="Source\vendor\obj_loader\OBJloader.h" />
+    <ClInclude Include="Source\vendor\obj_loader\vboindexer.hpp" />
+    <ClInclude Include="Source\ComplexModel.h" />
+    <ClInclude Include="Source\tests\TestComplexModel.h" />
+    <ClInclude Include="Source\BasicModelExtension.h" />
+    <ClInclude Include="Source\Tree1.h" />
+    <ClInclude Include="Source\Terrain1.h" />
+    <ClInclude Include="Source\tests\TestTerrain1.h" />
+    <ClInclude Include="Source\tests\TestTree1.h" />
+    <ClInclude Include="Source\tests\TestRocks.h" />
+    <ClInclude Include="Source\tests\TestGrass.h" />
+    <ClInclude Include="Source\Grass.h" />
+    <ClInclude Include="Source\Rocks.h" />
+    <ClInclude Include="Source\HeightMapGenerator.h" />
+    <ClInclude Include="Source\tests\TestTerrainGeneration.h" />
+    <ClInclude Include="Source\tests\TestBush.h" />
+    <ClInclude Include="Source\tests\TestBush1.h" />
+    <ClInclude Include="Source\tests\TestBush2.h" />
+    <ClInclude Include="Source\tests\TestBush3.h" />
+    <ClInclude Include="Source\tests\TestTree2.h" />
+    <ClInclude Include="Source\Bush.h" />
+    <ClInclude Include="Source\Bush1.h" />
+    <ClInclude Include="Source\Bush2.h" />
+    <ClInclude Include="Source\Bush3.h" />
+    <ClInclude Include="Source\Tree2.h" />
+    <ClInclude Include="Source\LandscapeManager.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\EventManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\vendor\stb_image\stb_image.cpp" />
+    <ClCompile Include="Source\vendor\imgui\imgui.cpp" />
+    <ClCompile Include="Source\vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Source\vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Source\vendor\imgui\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="Source\application.cpp" />
+    <ClCompile Include="Source\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\Object.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\Texture.cpp" />
+    <ClCompile Include="Source\VertexArray.cpp" />
+    <ClCompile Include="Source\VertexBuffer.cpp" />
+    <ClCompile Include="Source\VertexBufferLayout.cpp" />
+    <ClCompile Include="Source\tests\Test.cpp" />
+    <ClCompile Include="Source\tests\TestClearColor.cpp" />
+    <ClCompile Include="Source\tests\TestModel.cpp" />
+    <ClCompile Include="Source\tests\TestTexture2D.cpp" />
+    <ClCompile Include="Source\tests\TestLight.cpp" />
+    <ClCompile Include="Source\vendor\obj_loader\vboindexer.cpp" />
+    <ClCompile Include="Source\ComplexModel.cpp" />
+    <ClCompile Include="Source\tests\TestComplexModel.cpp" />
+    <ClCompile Include="Source\BasicModelExtension.cpp" />
+    <ClCompile Include="Source\Tree1.cpp" />
+    <ClCompile Include="Source\Terrain1.cpp" />
+    <ClCompile Include="Source\tests\TestTerrain1.cpp" />
+    <ClCompile Include="Source\tests\TestTree1.cpp" />
+    <ClCompile Include="Source\tests\TestRocks.cpp" />
+    <ClCompile Include="Source\tests\TestGrass.cpp" />
+    <ClCompile Include="Source\Grass.cpp" />
+    <ClCompile Include="Source\Rocks.cpp" />
+    <ClCompile Include="Source\HeightMapGenerator.cpp" />
+    <ClCompile Include="Source\tests\TestTerrainGeneration.cpp" />
+    <ClCompile Include="Source\tests\TestBush.cpp" />
+    <ClCompile Include="Source\tests\TestBush1.cpp" />
+    <ClCompile Include="Source\tests\TestBush2.cpp" />
+    <ClCompile Include="Source\tests\TestBush3.cpp" />
+    <ClCompile Include="Source\tests\TestTree2.cpp" />
+    <ClCompile Include="Source\Bush.cpp" />
+    <ClCompile Include="Source\Bush1.cpp" />
+    <ClCompile Include="Source\Bush2.cpp" />
+    <ClCompile Include="Source\Bush3.cpp" />
+    <ClCompile Include="Source\Tree2.cpp" />
+    <ClCompile Include="Source\LandscapeManager.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\EventManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\basic_light.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\cement.jpg" />
+    <Image Include="res\textures\autumn_leaves.png" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+﻿  TestTerrainGeneration.cpp
+C:\Users\noah_\git\comp-371\VS2017\Source\tests\TestTerrainGeneration.cpp(28,22): warning C4244: 'argument': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\noah_\git\comp-371\VS2017\Source\tests\TestTerrainGeneration.cpp(45,12): warning C4101: 'renderer': unreferenced local variable
+C:\Users\noah_\git\comp-371\VS2017\Source\tests\TestTerrainGeneration.cpp(93,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\noah_\git\comp-371\VS2017\Source\tests\TestTerrainGeneration.cpp(94,22): warning C4018: '<': signed/unsigned mismatch
+  Labs.vcxproj -> C:\Users\noah_\git\comp-371\VS2017\/../Bin/Labs-Debug.exe
